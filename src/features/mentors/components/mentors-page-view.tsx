@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 
 import { AdminTable } from "@/components/admin/admin-table";
 import { SearchInput } from "@/components/admin/search-input";
+import { CreateMentorDialog } from "@/features/mentors/components/create-mentor-dialog";
 import { mentorColumns } from "@/features/mentors/config/table-columns";
 import { useMentors } from "@/features/mentors/hooks/use-mentors";
 import { getUserDisplayName } from "@/types/user";
@@ -32,12 +33,15 @@ export function MentorsPageView() {
             Tutors and group assignments
           </p>
         </div>
-        <SearchInput
-          value={search}
-          onChange={setSearch}
-          placeholder="Search mentors..."
-          className="w-full sm:w-72"
-        />
+        <div className="flex flex-wrap items-center gap-2">
+          <SearchInput
+            value={search}
+            onChange={setSearch}
+            placeholder="Search mentors..."
+            className="w-full sm:w-72"
+          />
+          <CreateMentorDialog />
+        </div>
       </div>
       {isError ? (
         <p className="text-sm text-destructive">{error.message}</p>

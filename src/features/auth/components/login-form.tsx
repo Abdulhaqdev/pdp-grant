@@ -109,10 +109,6 @@ export function LoginForm() {
             )}
           </Button>
 
-          <p className="mt-4 text-center text-xs text-muted-foreground">
-            Telefon: 13 ta belgi · masalan{" "}
-            <span className="font-mono text-[#229b91]">+998901234567</span>
-          </p>
         </form>
       </Form>
     </div>

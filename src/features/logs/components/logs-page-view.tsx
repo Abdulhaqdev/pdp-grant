@@ -7,13 +7,7 @@ import { FilterBar, FilterField } from "@/components/admin/filter-bar";
 import { SearchInput } from "@/components/admin/search-input";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { LabeledSelect } from "@/components/admin/labeled-select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { logTableColumns } from "@/features/logs/config/log-table-columns";
 import { useLogs } from "@/features/logs/hooks/use-logs";
@@ -91,23 +85,19 @@ export function LogsPageView() {
           />
         </FilterField>
         <FilterField label="Role">
-          <Select
+          <LabeledSelect
             value={role}
             onValueChange={(v) => {
               setRole(v as typeof role);
               setPage(1);
             }}
-          >
-            <SelectTrigger className="h-9 w-full">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All roles</SelectItem>
-              <SelectItem value="admin">Admin</SelectItem>
-              <SelectItem value="mentor">Mentor</SelectItem>
-              <SelectItem value="student">Student</SelectItem>
-            </SelectContent>
-          </Select>
+            options={[
+              { value: "all", label: "All roles" },
+              { value: "admin", label: "Admin" },
+              { value: "mentor", label: "Mentor" },
+              { value: "student", label: "Student" },
+            ]}
+          />
         </FilterField>
         <FilterField label="From">
           <Input

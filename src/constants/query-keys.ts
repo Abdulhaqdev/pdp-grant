@@ -30,6 +30,7 @@ export const queryKeys = {
     pending: ["certificates", "pending"] as const,
   },
   users: {
+    all: ["users"] as const,
     list: (params?: { page?: number; limit?: number; role?: string }) =>
       ["users", "list", params] as const,
   },

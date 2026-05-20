@@ -6,6 +6,7 @@ export const ROUTES = {
     students: "/admin/students",
     mentors: "/admin/mentors",
     groups: "/admin/groups",
+    users: "/admin/users",
     certificates: "/admin/certificates",
     monthlyScores: "/admin/monthly-scores",
     leaderboard: "/admin/leaderboard",
@@ -14,9 +15,15 @@ export const ROUTES = {
   },
   student: {
     dashboard: "/student",
+    group: "/student/group",
+    leaderboard: "/student/leaderboard",
+    certificates: "/student/certificates",
   },
   mentor: {
     dashboard: "/mentor",
+    students: "/mentor/students",
+    groups: "/mentor/groups",
+    leaderboard: "/mentor/leaderboard",
   },
 } as const;
 

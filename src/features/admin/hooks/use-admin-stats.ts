@@ -10,9 +10,10 @@ import { leaderboardService } from "@/services/leaderboard.service";
 import { mentorsService } from "@/services/mentors.service";
 import { studentsService } from "@/services/students.service";
 
-export function useAdminStats() {
+export function useAdminStats(options?: { enabled?: boolean }) {
   const query = useQuery({
     queryKey: queryKeys.admin.stats,
+    enabled: options?.enabled ?? true,
     queryFn: async () => {
       const [students, mentors, groups, certificates, leaderboard] =
         await Promise.all([

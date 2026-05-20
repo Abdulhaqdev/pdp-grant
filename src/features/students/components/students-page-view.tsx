@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 
 import { AdminTable } from "@/components/admin/admin-table";
 import { SearchInput } from "@/components/admin/search-input";
+import { CreateStudentDialog } from "@/features/students/components/create-student-dialog";
 import { studentColumns } from "@/features/students/config/table-columns";
 import { useStudents } from "@/features/students/hooks/use-students";
 import { getUserDisplayName } from "@/types/user";
@@ -33,12 +34,15 @@ export function StudentsPageView() {
             Manage learners, grant status, and group assignments
           </p>
         </div>
-        <SearchInput
-          value={search}
-          onChange={setSearch}
-          placeholder="Search students..."
-          className="w-full sm:w-72"
-        />
+        <div className="flex flex-wrap items-center gap-2">
+          <SearchInput
+            value={search}
+            onChange={setSearch}
+            placeholder="Search students..."
+            className="w-full sm:w-72"
+          />
+          <CreateStudentDialog />
+        </div>
       </div>
       {isError ? (
         <p className="text-sm text-destructive">{error.message}</p>

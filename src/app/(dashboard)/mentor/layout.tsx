@@ -1,16 +1,9 @@
-"use client";
-
-import { DashboardLayout } from "@/components/layout/dashboard-layout";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { AppLayout } from "@/components/layout/app-layout";
 
 export default function MentorLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <TooltipProvider>
-      <DashboardLayout role="mentor">{children}</DashboardLayout>
-    </TooltipProvider>
-  );
+  return <AppLayout role="mentor">{children}</AppLayout>;
 }
