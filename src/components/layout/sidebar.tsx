@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 import { APP_CONFIG } from "@/constants/config";
-import type { UserRole } from "@/constants/routes";
+import type { AppRole } from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { useUiStore } from "@/store/ui.store";
 import { Badge } from "@/components/ui/badge";
@@ -34,7 +34,7 @@ export interface NavItem {
   badge?: string;
 }
 
-const NAV_BY_ROLE: Record<UserRole, NavItem[]> = {
+const NAV_BY_ROLE: Record<AppRole, NavItem[]> = {
   admin: [
     { title: "Dashboard", href: "/admin", icon: LayoutDashboardIcon },
     { title: "Students", href: "/admin/students", icon: GraduationCapIcon },
@@ -58,7 +58,7 @@ const NAV_BY_ROLE: Record<UserRole, NavItem[]> = {
 };
 
 interface SidebarProps {
-  role: UserRole;
+  role: AppRole;
 }
 
 export function Sidebar({ role }: SidebarProps) {

@@ -4,9 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2Icon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
-import { loginSchema, type LoginFormValues } from "@/schemas/auth.schema";
+import {
+  loginSchema,
+  normalizeLoginUsername,
+  type LoginFormValues,
+} from "@/schemas/auth.schema";
 import { useAuth } from "@/hooks/use-auth";
-import type { User } from "@/types/user";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,86 +20,50 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-const DEMO_ACCOUNTS: Record<string, Omit<User, "id">> = {
-  "admin@lms.com": {
-    email: "admin@lms.com",
-    name: "Alex Admin",
-    role: "admin",
-  },
-  "student@lms.com": {
-    email: "student@lms.com",
-    name: "Sam Student",
-    role: "student",
-  },
-  "mentor@lms.com": {
-    email: "mentor@lms.com",
-    name: "Morgan Mentor",
-    role: "mentor",
-  },
-};
-
-function resolveDemoUser(email: string): User | null {
-  const account = DEMO_ACCOUNTS[email.toLowerCase()];
-  if (!account) return null;
-  return { id: `demo-${account.role}`, ...account };
-}
+import { cn } from "@/lib/utils";
 
 export function LoginForm() {
-  const { login } = useAuth();
+  const { login, isLoggingIn } = useAuth();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "admin@lms.com",
-      password: "password",
+      username: "",
+      password: "",
     },
   });
 
-  const isSubmitting = form.formState.isSubmitting;
-
-  async function onSubmit(values: LoginFormValues) {
-    const user = resolveDemoUser(values.email);
-    if (!user) {
-      form.setError("email", {
-        message: "Use admin@lms.com, student@lms.com, or mentor@lms.com",
-      });
-      return;
-    }
-    await new Promise((r) => setTimeout(r, 600));
-    login(user, "demo-access-token");
+  function onSubmit(values: LoginFormValues) {
+    login(normalizeLoginUsername(values.username), values.password);
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Sign in</CardTitle>
-        <CardDescription>
-          Demo accounts: admin@lms.com · student@lms.com · mentor@lms.com
-        </CardDescription>
-      </CardHeader>
+    <div
+      className={cn(
+        "overflow-hidden rounded-2xl border border-[var(--border)] bg-card shadow-xl shadow-[#229b91]/8",
+        "ring-1 ring-[#229b91]/10"
+      )}
+    >
+      <div className="h-1.5 bg-gradient-to-r from-[#229b91] via-[#26a49d] to-[#ffcc19]" />
+
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <CardContent className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 sm:p-8">
+          <div className="space-y-5">
             <FormField
               control={form.control}
-              name="email"
+              name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className="text-sm font-medium text-[var(--pdp-navy)]">
+                    Telefon raqam
+                  </FormLabel>
                   <FormControl>
                     <Input
-                      type="email"
-                      placeholder="you@example.com"
-                      autoComplete="email"
+                      type="text"
+                      inputMode="text"
+                      placeholder="+998901234567"
+                      autoComplete="username"
+                      className="h-10 border-[var(--border)] bg-background focus-visible:border-[#229b91] focus-visible:ring-[#229b91]/25"
                       {...field}
                     />
                   </FormControl>
@@ -109,12 +76,15 @@ export function LoginForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className="text-sm font-medium text-[var(--pdp-navy)]">
+                    Parol
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="password"
                       placeholder="••••••••"
                       autoComplete="current-password"
+                      className="h-10 border-[var(--border)] bg-background focus-visible:border-[#229b91] focus-visible:ring-[#229b91]/25"
                       {...field}
                     />
                   </FormControl>
@@ -122,21 +92,29 @@ export function LoginForm() {
                 </FormItem>
               )}
             />
-          </CardContent>
-          <CardFooter className="flex flex-col gap-3 border-t-0 bg-transparent pt-0">
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? (
-                <>
-                  <Loader2Icon className="animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                "Sign in"
-              )}
-            </Button>
-          </CardFooter>
+          </div>
+
+          <Button
+            type="submit"
+            className="mt-6 h-10 w-full bg-[#229b91] text-sm font-semibold text-white shadow-md transition-all hover:bg-[#008982] hover:shadow-lg focus-visible:ring-[#ffcc19] focus-visible:ring-offset-2"
+            disabled={isLoggingIn}
+          >
+            {isLoggingIn ? (
+              <>
+                <Loader2Icon className="animate-spin" />
+                Kirilmoqda...
+              </>
+            ) : (
+              "Kirish"
+            )}
+          </Button>
+
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            Telefon: 13 ta belgi · masalan{" "}
+            <span className="font-mono text-[#229b91]">+998901234567</span>
+          </p>
         </form>
       </Form>
-    </Card>
+    </div>
   );
 }

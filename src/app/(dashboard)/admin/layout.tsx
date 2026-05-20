@@ -1,16 +1,14 @@
-"use client";
+import { AdminLayout } from "@/components/layout/admin-layout";
+import { ErrorBoundary } from "@/components/shared/error-boundary";
 
-import { DashboardLayout } from "@/components/layout/dashboard-layout";
-import { TooltipProvider } from "@/components/ui/tooltip";
-
-export default function AdminLayout({
+export default function AdminRouteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <TooltipProvider>
-      <DashboardLayout role="admin">{children}</DashboardLayout>
-    </TooltipProvider>
+    <AdminLayout>
+      <ErrorBoundary>{children}</ErrorBoundary>
+    </AdminLayout>
   );
 }

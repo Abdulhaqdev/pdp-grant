@@ -1,17 +1,12 @@
-# Grant LMS — Frontend Starter
+# Grant LMS — Frontend
 
-Modern learning management system frontend built with Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui.
+Enterprise admin dashboard for the Grant LMS API ([Swagger](https://api.grant.boostify.uz/docs)).
 
 ## Stack
 
-- **Framework:** Next.js 15 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS v4 + shadcn/ui
-- **Data:** TanStack Query + Axios
-- **State:** Zustand
-- **Forms:** React Hook Form + Zod
+Next.js 15 · TypeScript · Tailwind v4 · shadcn/ui · TanStack Query · Axios · Zustand · React Hook Form · Zod · Recharts
 
-## Getting started
+## Setup
 
 ```bash
 cp .env.example .env.local
@@ -19,46 +14,43 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Set `NEXT_PUBLIC_API_URL=https://api.grant.boostify.uz` (no `/api` suffix — paths match OpenAPI).
 
-### Demo login
+Login uses OAuth2 password flow: **email as `username`**, form-urlencoded `POST /auth/login`.
 
-| Email | Role |
-|-------|------|
-| `admin@lms.com` | Admin dashboard |
-| `student@lms.com` | Student dashboard |
-| `mentor@lms.com` | Mentor dashboard |
+## Admin console (`/admin`)
 
-Password: any value with 6+ characters (e.g. `password`).
+| Route | Feature |
+|-------|---------|
+| `/admin` | Dashboard — stats, charts, leaderboard preview |
+| `/admin/students` | Students CRUD list |
+| `/admin/mentors` | Mentors list |
+| `/admin/groups` | Groups list |
+| `/admin/certificates` | Pending approvals |
+| `/admin/monthly-scores` | KPI scores (forms placeholder) |
+| `/admin/leaderboard` | Full rankings table |
+| `/admin/logs` | Audit logs (mock data, API-ready) |
+| `/admin/settings` | Account & env |
 
-## Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server (Turbopack) |
-| `npm run build` | Production build |
-| `npm run lint` | ESLint |
-| `npm run format` | Prettier |
-| `npm run typecheck` | TypeScript check |
-
-## Project structure
+## Architecture
 
 ```
 src/
-├── app/              # Routes (auth, dashboard, api)
-├── components/       # UI, layout, shared, tables
-├── features/         # Domain modules (auth, students, …)
-├── services/         # API client & endpoints
-├── store/            # Zustand stores
-├── providers/        # React context providers
-├── hooks/
-├── types/
-├── schemas/
-├── constants/
-├── utils/
-└── lib/
+├── app/(dashboard)/admin/     # Admin routes
+├── components/admin/          # AdminTable, StatsCard, FilterBar, …
+├── components/layout/         # AdminLayout, sidebar, breadcrumbs
+├── features/
+│   ├── admin/                 # Dashboard, stats, settings
+│   ├── students|mentors|groups|certificates|leaderboard|monthly-scores|logs/
+├── services/                  # API clients aligned with OpenAPI
+├── types/                     # Generated-style DTOs
+└── constants/                 # routes, query-keys, admin-nav
 ```
 
-## Environment variables
+## Logs (future API)
 
-See `.env.example` for required `NEXT_PUBLIC_*` variables.
+`logsService.list()` uses mock data in `features/logs/data/mock-logs.ts`. When `GET /audit/logs` exists, replace the implementation in `services/logs.service.ts` only.
+
+## Scripts
+
+`npm run dev` · `npm run build` · `npm run lint` · `npm run typecheck` · `npm run format`

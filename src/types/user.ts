@@ -1,9 +1,27 @@
-import type { UserRole } from "@/constants/routes";
+export type ApiUserRole = "student" | "admin" | "mentor";
 
-export interface User {
-  id: string;
+export interface UserRead {
+  id: number;
+  phone: string;
   email: string;
-  name: string;
-  role: UserRole;
-  avatarUrl?: string;
+  first_name: string;
+  last_name: string;
+  father_name: string;
+  role: ApiUserRole;
+  created_at: string;
+  updated_at: string;
+}
+
+export function getUserDisplayName(
+  user: Pick<UserRead, "first_name" | "last_name" | "father_name">
+): string {
+  return [user.last_name, user.first_name, user.father_name]
+    .filter(Boolean)
+    .join(" ");
+}
+
+export function getUserInitials(
+  user: Pick<UserRead, "first_name" | "last_name">
+): string {
+  return `${user.first_name[0] ?? ""}${user.last_name[0] ?? ""}`.toUpperCase();
 }

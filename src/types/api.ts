@@ -1,20 +1,19 @@
-export interface ApiResponse<T> {
-  data: T;
-  message?: string;
+export interface ValidationErrorItem {
+  loc: (string | number)[];
+  msg: string;
+  type: string;
 }
 
-export interface ApiError {
-  message: string;
-  statusCode?: number;
-  errors?: Record<string, string[]>;
+export interface HTTPValidationError {
+  detail: ValidationErrorItem[];
 }
 
-export interface PaginatedResponse<T> {
-  data: T[];
-  meta: {
-    total: number;
-    page: number;
-    perPage: number;
-    totalPages: number;
-  };
+export interface PaginatedParams {
+  page?: number;
+  limit?: number;
+}
+
+export interface Token {
+  access_token: string;
+  token_type: string;
 }

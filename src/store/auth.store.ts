@@ -1,16 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import type { UserRole } from "@/constants/routes";
-import type { User } from "@/types/user";
+import type { UserRead } from "@/types/user";
 
 interface AuthState {
-  user: User | null;
+  user: UserRead | null;
   accessToken: string | null;
   isAuthenticated: boolean;
-  setSession: (user: User, accessToken: string) => void;
+  setSession: (user: UserRead, accessToken: string) => void;
   clearSession: () => void;
-  setRole: (role: UserRole) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -31,10 +29,6 @@ export const useAuthStore = create<AuthState>()(
         }
         set({ user: null, accessToken: null, isAuthenticated: false });
       },
-      setRole: (role) =>
-        set((state) =>
-          state.user ? { user: { ...state.user, role } } : state
-        ),
     }),
     {
       name: "lms-auth",

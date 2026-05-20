@@ -1,12 +1,12 @@
 "use client";
 
-import type { UserRole } from "@/constants/routes";
+import type { AppRole } from "@/constants/routes";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Navbar } from "@/components/layout/navbar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  role: UserRole;
+  role: AppRole;
 }
 
 export function DashboardLayout({ children, role }: DashboardLayoutProps) {

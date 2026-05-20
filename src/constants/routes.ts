@@ -3,6 +3,14 @@ export const ROUTES = {
   login: "/login",
   admin: {
     dashboard: "/admin",
+    students: "/admin/students",
+    mentors: "/admin/mentors",
+    groups: "/admin/groups",
+    certificates: "/admin/certificates",
+    monthlyScores: "/admin/monthly-scores",
+    leaderboard: "/admin/leaderboard",
+    logs: "/admin/logs",
+    settings: "/admin/settings",
   },
   student: {
     dashboard: "/student",
@@ -12,9 +20,9 @@ export const ROUTES = {
   },
 } as const;
 
-export type UserRole = "admin" | "student" | "mentor";
+export type AppRole = "admin" | "student" | "mentor";
 
-export const ROLE_DASHBOARD: Record<UserRole, string> = {
+export const ROLE_DASHBOARD: Record<AppRole, string> = {
   admin: ROUTES.admin.dashboard,
   student: ROUTES.student.dashboard,
   mentor: ROUTES.mentor.dashboard,

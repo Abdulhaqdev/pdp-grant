@@ -1,52 +1,72 @@
-import { GraduationCapIcon } from "lucide-react";
-import Link from "next/link";
-
-import { APP_CONFIG } from "@/constants/config";
+import { PdpLogo } from "@/components/brand/pdp-logo";
+import { BRAND } from "@/constants/brand";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
-  title: string;
-  subtitle?: string;
 }
 
-export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
+export function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
-      <div className="relative hidden flex-col justify-between overflow-hidden bg-primary p-10 text-primary-foreground lg:flex">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent" />
-        <Link href="/" className="relative z-10 flex items-center gap-2 font-semibold">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-primary-foreground/15">
-            <GraduationCapIcon className="size-5" />
-          </div>
-          <span className="text-lg">{APP_CONFIG.name}</span>
-        </Link>
-        <div className="relative z-10 max-w-md space-y-4">
-          <h2 className="text-3xl font-bold tracking-tight">
-            Empower learning at scale
+    <div className="grid min-h-screen lg:grid-cols-[1fr_1.05fr]">
+      {/* Brand panel */}
+      <div
+        className="relative hidden flex-col overflow-hidden lg:flex"
+        style={{
+          background: `linear-gradient(160deg, ${BRAND.colors.tealDark} 0%, ${BRAND.colors.teal} 45%, ${BRAND.colors.tealLight} 100%)`,
+        }}
+      >
+        <div
+          className="pointer-events-none absolute -right-24 -top-24 size-[420px] rounded-full border-[28px] border-white/10"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-32 -left-16 size-[360px] rounded-full bg-[#FFCC19]/20 blur-2xl"
+          aria-hidden
+        />
+
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-12 py-16 text-center">
+          <PdpLogo
+            variant="mark"
+            size="xl"
+            priority
+            className="drop-shadow-lg"
+          />
+          <h2 className="mt-10 font-heading text-3xl font-bold tracking-tight text-white">
+            {BRAND.shortName} Grant LMS
           </h2>
-          <p className="text-primary-foreground/80">
-            Manage students, mentors, groups, and certifications in one modern
-            platform built for grant programs.
+          <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-white/85">
+            Talabalar, mentorlar va grant dasturlarini boshqarish platformasi
           </p>
+          <div className="mt-10 flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm text-white/90 backdrop-blur-sm">
+            <span className="size-2 rounded-full bg-[#FFCC19]" />
+            {BRAND.name}
+          </div>
         </div>
-        <p className="relative z-10 text-sm text-primary-foreground/60">
-          © {new Date().getFullYear()} {APP_CONFIG.name}
+
+        <p className="relative z-10 px-12 pb-8 text-center text-xs text-white/50">
+          © {new Date().getFullYear()} {BRAND.name}
         </p>
       </div>
 
-      <div className="flex flex-col items-center justify-center p-6 sm:p-10">
-        <div className="mb-8 flex items-center gap-2 lg:hidden">
-          <div className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <GraduationCapIcon className="size-4" />
-          </div>
-          <span className="font-semibold">{APP_CONFIG.name}</span>
-        </div>
-        <div className="w-full max-w-md space-y-6">
-          <div className="space-y-1 text-center sm:text-left">
-            <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
-            {subtitle ? (
-              <p className="text-sm text-muted-foreground">{subtitle}</p>
-            ) : null}
+      {/* Login panel */}
+      <div className="relative flex flex-col items-center justify-center bg-[var(--background)] px-6 py-10 sm:px-12">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 20% 10%, ${BRAND.colors.teal}18 0%, transparent 45%), radial-gradient(circle at 80% 90%, ${BRAND.colors.yellow}22 0%, transparent 40%)`,
+          }}
+          aria-hidden
+        />
+
+        <div className="relative z-10 w-full max-w-[420px]">
+          <div className="mb-8 flex flex-col items-center text-center lg:mb-10">
+            <PdpLogo variant="full" size="md" priority className="lg:hidden" />
+            <h1 className="font-heading text-2xl font-bold tracking-tight text-[var(--pdp-navy)]">
+              Tizimga kirish
+            </h1>
+            <p className="mt-2 text-[15px] text-muted-foreground">
+              Email yoki telefon raqam va parolingizni kiriting
+            </p>
           </div>
           {children}
         </div>
