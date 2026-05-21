@@ -62,9 +62,15 @@ export function MentorTutorScoresPageView() {
   });
 
   function onSubmit(values: TutorScoreFormValues) {
+    const student = students.find(
+      (s) => s.student_id === Number(values.student_id)
+    );
+    if (!student) return;
+
     updateTutorScore.mutate(
       {
-        student_id: Number(values.student_id),
+        student_id: student.student_id,
+        user_id: student.user_id,
         month: values.month,
         year: values.year,
         tutor_score: values.tutor_score,
@@ -96,7 +102,7 @@ export function MentorTutorScoresPageView() {
           </CardTitle>
           <CardDescription>
             Select a student and period, then enter the tutor score (0–100).
-            Requires an existing monthly score record for that month.
+            Updates tutor score for the selected month, or creates a monthly record if none exists.
           </CardDescription>
         </CardHeader>
         <CardContent>

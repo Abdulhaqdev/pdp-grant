@@ -8,6 +8,7 @@ import { monthlyScoresService } from "@/services/monthly-scores.service";
 
 export interface UpdateTutorScoreInput {
   student_id: number;
+  user_id: number;
   month: number;
   year: number;
   tutor_score: number;
@@ -23,7 +24,7 @@ export function useUpdateTutorScore() {
       queryClient.invalidateQueries({ queryKey: queryKeys.monthlyScores.all });
       queryClient.invalidateQueries({ queryKey: queryKeys.leaderboard.all });
       queryClient.invalidateQueries({
-        queryKey: queryKeys.monthlyScores.performance(variables.student_id),
+        queryKey: queryKeys.monthlyScores.performance(variables.user_id),
       });
       toast.success("Tutor score saved");
     },
