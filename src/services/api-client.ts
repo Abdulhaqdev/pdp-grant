@@ -2,6 +2,7 @@ import axios, { type AxiosError, type InternalAxiosRequestConfig } from "axios";
 
 import { APP_CONFIG } from "@/constants/config";
 import type { HTTPValidationError } from "@/types/api";
+import { useAuthStore } from "@/store/auth.store";
 
 function extractErrorMessage(error: AxiosError): string {
   const data = error.response?.data as
@@ -47,8 +48,10 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401 && typeof window !== "undefined") {
       const isLogin = error.config?.url?.includes("/auth/login");
       if (!isLogin) {
-        localStorage.removeItem("access_token");
-        window.location.href = "/login";
+        useAuthStore.getState().clearSession();
+        if (!window.location.pathname.startsWith("/login")) {
+          window.location.href = "/login";
+        }
       }
     }
 

@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${plusJakarta.variable} min-h-screen font-sans antialiased`}
       >

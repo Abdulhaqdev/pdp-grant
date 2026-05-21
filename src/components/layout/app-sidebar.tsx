@@ -26,17 +26,23 @@ import { PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react";
 
 interface AppSidebarProps {
   role: AppRole;
+  variant?: "desktop" | "mobile";
   pendingCertificates?: number;
   className?: string;
+  onNavigate?: () => void;
 }
 
 export function AppSidebar({
   role,
+  variant = "desktop",
   pendingCertificates = 0,
   className,
+  onNavigate,
 }: AppSidebarProps) {
   const pathname = usePathname();
   const { sidebarCollapsed, toggleSidebar } = useUiStore();
+  const isMobile = variant === "mobile";
+  const collapsed = isMobile ? false : sidebarCollapsed;
   const items = NAV_BY_ROLE[role];
   const home = DASHBOARD_HOME[role];
 
@@ -51,23 +57,28 @@ export function AppSidebar({
     <aside
       className={cn(
         "flex h-full flex-col border-r border-border/60 bg-sidebar",
-        sidebarCollapsed ? "w-[4.5rem]" : "w-60",
+        collapsed
+          ? "w-[4.5rem]"
+          : isMobile
+            ? "w-full"
+            : "w-60",
         className
       )}
     >
       <div
         className={cn(
           "flex items-center border-b border-border/60 px-3",
-          sidebarCollapsed
+          collapsed
             ? "h-[4.5rem] flex-col justify-center gap-1.5 py-2"
             : "h-14 gap-2"
         )}
       >
         <Link
           href={home}
+          onClick={onNavigate}
           className={cn(
             "flex items-center transition-opacity hover:opacity-90",
-            sidebarCollapsed
+            collapsed
               ? "size-9 shrink-0 overflow-hidden rounded-lg"
               : "min-w-0 flex-1 py-1"
           )}
@@ -76,28 +87,30 @@ export function AppSidebar({
           <Image
             src={BRAND.logoWordmark}
             alt={BRAND.name}
-            width={sidebarCollapsed ? 36 : 140}
-            height={sidebarCollapsed ? 36 : 36}
+            width={collapsed ? 36 : 140}
+            height={collapsed ? 36 : 36}
             className={cn(
               "object-contain object-left",
-              sidebarCollapsed ? "size-9 object-cover" : "h-8 w-auto max-w-full"
+              collapsed ? "size-9 object-cover" : "h-8 w-auto max-w-full"
             )}
             priority
           />
         </Link>
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          onClick={toggleSidebar}
-          className={cn(sidebarCollapsed && "shrink-0")}
-          aria-label="Toggle sidebar"
-        >
-          {sidebarCollapsed ? (
-            <PanelLeftOpenIcon className="size-4" />
-          ) : (
-            <PanelLeftCloseIcon className="size-4" />
-          )}
-        </Button>
+        {!isMobile ? (
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={toggleSidebar}
+            className={cn(collapsed && "shrink-0")}
+            aria-label="Toggle sidebar"
+          >
+            {collapsed ? (
+              <PanelLeftOpenIcon className="size-4" />
+            ) : (
+              <PanelLeftCloseIcon className="size-4" />
+            )}
+          </Button>
+        ) : null}
       </div>
 
       <ScrollArea className="flex-1 px-2 py-3">
@@ -113,16 +126,17 @@ export function AppSidebar({
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={onNavigate}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all",
                   active
                     ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm"
                     : "text-sidebar-foreground hover:bg-sidebar-accent",
-                  sidebarCollapsed && "justify-center px-2"
+                  collapsed && "justify-center px-2"
                 )}
               >
                 <item.icon className="size-4 shrink-0 opacity-80" />
-                {!sidebarCollapsed && (
+                {!collapsed && (
                   <>
                     <span className="flex-1 truncate">{item.title}</span>
                     {badge ? (
@@ -135,7 +149,7 @@ export function AppSidebar({
               </Link>
             );
 
-            if (sidebarCollapsed) {
+            if (collapsed) {
               return (
                 <Tooltip key={item.href}>
                   <TooltipTrigger render={link} />

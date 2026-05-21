@@ -3,7 +3,7 @@ import { z } from "zod";
 import { baseUserFieldsSchema } from "@/schemas/shared-user.schema";
 
 export const createStudentSchema = baseUserFieldsSchema.extend({
-  student_id: z.number().int().positive("Student ID musbat son bo‘lishi kerak"),
+  student_id: z.number().int().positive("Student ID must be a positive number"),
   group_id: z.number().int().positive().nullable().optional(),
   is_grant: z.boolean(),
   course_number: z.number().int().min(1).max(10),

@@ -12,6 +12,17 @@ export interface UserRead {
   updated_at: string;
 }
 
+export interface UserUpdateName {
+  first_name?: string | null;
+  last_name?: string | null;
+  father_name?: string | null;
+}
+
+export interface UserUpdateUnique {
+  phone?: string | null;
+  email?: string | null;
+}
+
 export function getUserDisplayName(
   user: Pick<UserRead, "first_name" | "last_name" | "father_name">
 ): string {

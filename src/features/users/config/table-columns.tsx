@@ -11,7 +11,7 @@ export const userColumns: ColumnDef<UserRead>[] = [
   { accessorKey: "id", header: "ID" },
   {
     id: "name",
-    header: "Foydalanuvchi",
+    header: "User",
     cell: ({ row }) => (
       <div>
         <p className="font-medium">{getUserDisplayName(row.original)}</p>
@@ -19,10 +19,10 @@ export const userColumns: ColumnDef<UserRead>[] = [
       </div>
     ),
   },
-  { accessorKey: "phone", header: "Telefon" },
+  { accessorKey: "phone", header: "Phone" },
   {
     accessorKey: "role",
-    header: "Rol",
+    header: "Role",
     cell: ({ row }) => (
       <Badge variant="outline" className="capitalize">
         {row.original.role}

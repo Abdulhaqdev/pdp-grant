@@ -5,8 +5,8 @@ import { LoginForm } from "@/features/auth";
 import { BRAND } from "@/constants/brand";
 
 export const metadata: Metadata = {
-  title: "Kirish",
-  description: `${BRAND.name} Grant LMS tizimiga kirish`,
+  title: "Sign in",
+  description: `Sign in to ${BRAND.name} Grant LMS`,
 };
 
 export default function LoginPage() {

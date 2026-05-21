@@ -1,5 +1,10 @@
 import type { PaginatedParams } from "@/types/api";
-import type { ApiUserRole, UserRead } from "@/types/user";
+import type {
+  ApiUserRole,
+  UserRead,
+  UserUpdateName,
+  UserUpdateUnique,
+} from "@/types/user";
 
 import { apiClient } from "@/services/api-client";
 import { ENDPOINTS } from "@/services/endpoints";
@@ -20,6 +25,27 @@ export const usersService = {
 
   async getById(id: number): Promise<UserRead> {
     const { data } = await apiClient.get<UserRead>(ENDPOINTS.users.byId(id));
+    return data;
+  },
+
+  async updateName(
+    payload: UserUpdateName,
+    userId?: number
+  ): Promise<void> {
+    await apiClient.put(ENDPOINTS.users.updateName, payload, {
+      params: userId != null ? { user_id: userId } : undefined,
+    });
+  },
+
+  async updateUnique(
+    payload: UserUpdateUnique,
+    userId?: number
+  ): Promise<UserRead> {
+    const { data } = await apiClient.put<UserRead>(
+      ENDPOINTS.users.updateUnique,
+      payload,
+      { params: userId != null ? { user_id: userId } : undefined }
+    );
     return data;
   },
 };

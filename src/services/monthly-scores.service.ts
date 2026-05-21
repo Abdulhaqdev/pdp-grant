@@ -1,4 +1,8 @@
-import type { MonthlyScoreCreate, MonthlyScoreRead } from "@/types/monthly-score";
+import type {
+  MonthlyScoreCreate,
+  MonthlyScoreRead,
+  MonthlyScoreUpdate,
+} from "@/types/monthly-score";
 
 import { apiClient } from "@/services/api-client";
 import { ENDPOINTS } from "@/services/endpoints";
@@ -7,6 +11,17 @@ export const monthlyScoresService = {
   async create(payload: MonthlyScoreCreate): Promise<MonthlyScoreRead> {
     const { data } = await apiClient.post<MonthlyScoreRead>(
       ENDPOINTS.monthlyScores.create,
+      payload
+    );
+    return data;
+  },
+
+  async update(
+    scoreId: number,
+    payload: MonthlyScoreUpdate
+  ): Promise<MonthlyScoreRead> {
+    const { data } = await apiClient.patch<MonthlyScoreRead>(
+      ENDPOINTS.monthlyScores.update(scoreId),
       payload
     );
     return data;

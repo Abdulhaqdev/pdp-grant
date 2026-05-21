@@ -9,7 +9,7 @@ export default function StudentGroupPage() {
     <div className="space-y-6">
       <PageHeader
         title="My Group"
-        description="Guruh a’zolari va mentor ma’lumotlari."
+        description="Group members and mentor information."
       />
     </div>
   );

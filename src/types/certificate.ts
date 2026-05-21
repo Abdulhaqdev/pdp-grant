@@ -14,3 +14,9 @@ export interface CertificateRead {
 export interface CertificateUpdateStatus {
   status: string;
 }
+
+export interface CertificateUploadParams {
+  title: string;
+  cert_type: string;
+  file: File;
+}

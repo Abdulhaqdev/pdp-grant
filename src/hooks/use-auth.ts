@@ -1,8 +1,8 @@
 "use client";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { toast } from "sonner";
 
 import { queryKeys } from "@/constants/query-keys";
@@ -14,26 +14,14 @@ import { useAuthStore } from "@/store/auth.store";
 export function useAuth() {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { user, isAuthenticated, setSession, clearSession, accessToken } =
-    useAuthStore();
-
-  const meQuery = useQuery({
-    queryKey: queryKeys.auth.me,
-    queryFn: () => authService.me(),
-    enabled: !!accessToken && !user,
-    retry: false,
-  });
-
-  useEffect(() => {
-    if (meQuery.data && accessToken && !user) {
-      setSession(meQuery.data, accessToken);
-    }
-  }, [meQuery.data, accessToken, user, setSession]);
+  const { user, isAuthenticated, setSession, clearSession } = useAuthStore();
 
   const loginMutation = useMutation({
     mutationFn: authService.login,
     onSuccess: async (token) => {
-      localStorage.setItem("access_token", token.access_token);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("access_token", token.access_token);
+      }
       const me = await authService.me();
       setSession(me, token.access_token);
       queryClient.setQueryData(queryKeys.auth.me, me);
@@ -71,6 +59,5 @@ export function useAuth() {
     login,
     logout,
     isLoggingIn: loginMutation.isPending,
-    meQuery,
   };
 }

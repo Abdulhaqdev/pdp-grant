@@ -2,6 +2,18 @@ import type { CertificateRead } from "@/types/certificate";
 import type { MonthlyScoreRead } from "@/types/monthly-score";
 import type { ApiUserRole, UserRead } from "@/types/user";
 
+/** Nested in GET /mentor/my-groups group.students */
+export interface StudentReadSlim {
+  user_id: number;
+  student_id: number;
+  group_id?: number | null;
+  is_grant: boolean;
+  course_number: number;
+  attendance: number;
+  academic: number;
+  assignment: number;
+}
+
 export interface StudentRead extends UserRead {
   user_id: number;
   student_id: number;

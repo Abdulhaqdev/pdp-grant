@@ -1,4 +1,5 @@
 import type { PaginatedParams } from "@/types/api";
+import type { MonthlyScoreRead } from "@/types/monthly-score";
 import type { StudentCreate, StudentRead, StudentUpdate } from "@/types/student";
 
 import { apiClient } from "@/services/api-client";
@@ -15,6 +16,13 @@ export const studentsService = {
   async getById(id: number): Promise<StudentRead> {
     const { data } = await apiClient.get<StudentRead>(
       ENDPOINTS.students.detail(id)
+    );
+    return data;
+  },
+
+  async getPerformance(studentId: number): Promise<MonthlyScoreRead[]> {
+    const { data } = await apiClient.get<MonthlyScoreRead[]>(
+      ENDPOINTS.students.performance(studentId)
     );
     return data;
   },

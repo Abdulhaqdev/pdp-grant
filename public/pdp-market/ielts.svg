@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" fill="none">
+  <rect width="320" height="200" rx="16" fill="#EEF2FF"/>
+  <rect x="64" y="48" width="192" height="120" rx="12" fill="#fff" stroke="#229b91" stroke-width="3"/>
+  <text x="160" y="100" text-anchor="middle" fill="#229b91" font-size="42" font-weight="800" font-family="system-ui,sans-serif">7.0</text>
+  <text x="160" y="132" text-anchor="middle" fill="#64748b" font-size="16" font-family="system-ui,sans-serif">IELTS Prep</text>
+  <rect x="96" y="152" width="128" height="8" rx="4" fill="#ffcc19"/>
+</svg>

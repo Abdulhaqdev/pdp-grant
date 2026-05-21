@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
 
-import { PageHeader } from "@/components/shared/page-header";
+import { StudentLeaderboardPageView } from "@/features/leaderboard/components/student-leaderboard-page-view";
 
 export const metadata: Metadata = { title: "Leaderboard" };
 
 export default function StudentLeaderboardPage() {
-  return (
-    <div className="space-y-6">
-      <PageHeader
-        title="Leaderboard"
-        description="Reyting va o‘rinlaringiz."
-      />
-    </div>
-  );
+  return <StudentLeaderboardPageView />;
 }

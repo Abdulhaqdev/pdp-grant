@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { AdminOnly } from "@/components/admin/admin-only";
+import { LabeledSelect } from "@/components/admin/labeled-select";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -25,7 +26,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LabeledSelect } from "@/components/admin/labeled-select";
 import { useCreateGroup } from "@/features/groups/hooks/use-create-group";
 import { useMentors } from "@/features/mentors/hooks/use-mentors";
 import {
@@ -72,15 +72,15 @@ export function CreateGroupDialog() {
           render={
             <Button size="sm">
               <PlusIcon className="size-4" />
-              Guruh qo‘shish
+              Add group
             </Button>
           }
         />
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Yangi guruh</DialogTitle>
+            <DialogTitle>Add group</DialogTitle>
             <DialogDescription>
-              POST /groups/ — faqat admin uchun
+              Create a new cohort and optionally assign a mentor.
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -90,7 +90,7 @@ export function CreateGroupDialog() {
                 name="group_number"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Guruh raqami</FormLabel>
+                    <FormLabel>Group number</FormLabel>
                     <FormControl>
                       <Input placeholder="G-12" {...field} />
                     </FormControl>
@@ -108,11 +108,11 @@ export function CreateGroupDialog() {
                       <LabeledSelect
                         value={field.value ?? "none"}
                         onValueChange={field.onChange}
-                        placeholder="Mentor tanlang"
+                        placeholder="Select mentor"
                         options={[
-                          { value: "none", label: "Tanlanmagan" },
+                          { value: "none", label: "Unassigned" },
                           ...mentors.map((m) => ({
-                            value: String(m.user_id),
+                            value: String(m.user_id ?? m.id),
                             label: getUserDisplayName(m),
                           })),
                         ]}
@@ -128,13 +128,13 @@ export function CreateGroupDialog() {
                   variant="outline"
                   onClick={() => setOpen(false)}
                 >
-                  Bekor qilish
+                  Cancel
                 </Button>
                 <Button type="submit" disabled={createGroup.isPending}>
                   {createGroup.isPending ? (
                     <Loader2Icon className="animate-spin" />
                   ) : null}
-                  Saqlash
+                  Save
                 </Button>
               </DialogFooter>
             </form>

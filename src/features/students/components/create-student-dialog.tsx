@@ -81,15 +81,15 @@ export function CreateStudentDialog() {
           render={
             <Button size="sm">
               <PlusIcon className="size-4" />
-              Talaba qo‘shish
+              Add student
             </Button>
           }
         />
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Yangi talaba</DialogTitle>
+            <DialogTitle>Add student</DialogTitle>
             <DialogDescription>
-              POST /user/student — faqat admin uchun
+              Create a new student account and assign a group.
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -121,7 +121,7 @@ export function CreateStudentDialog() {
                   name="course_number"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Kurs</FormLabel>
+                      <FormLabel>Course</FormLabel>
                       <FormControl>
                         <Input
                           type="number"
@@ -141,7 +141,7 @@ export function CreateStudentDialog() {
                   name="group_id"
                   render={({ field }) => (
                     <FormItem className="sm:col-span-2">
-                      <FormLabel>Guruh</FormLabel>
+                      <FormLabel>Group</FormLabel>
                       <FormControl>
                         <LabeledSelect
                           value={field.value ? String(field.value) : "none"}
@@ -150,9 +150,9 @@ export function CreateStudentDialog() {
                               v === "none" ? undefined : Number(v)
                             )
                           }
-                          placeholder="Guruh tanlang"
+                          placeholder="Select group"
                           options={[
-                            { value: "none", label: "Tanlanmagan" },
+                            { value: "none", label: "Unassigned" },
                             ...groups.map((g) => ({
                               value: String(g.id),
                               label: g.group_number,
@@ -175,7 +175,7 @@ export function CreateStudentDialog() {
                           onCheckedChange={field.onChange}
                         />
                       </FormControl>
-                      <FormLabel className="!mt-0">Grant talaba</FormLabel>
+                      <FormLabel className="!mt-0">Grant student</FormLabel>
                     </FormItem>
                   )}
                 />
@@ -186,13 +186,13 @@ export function CreateStudentDialog() {
                   variant="outline"
                   onClick={() => setOpen(false)}
                 >
-                  Bekor qilish
+                  Cancel
                 </Button>
                 <Button type="submit" disabled={createStudent.isPending}>
                   {createStudent.isPending ? (
                     <Loader2Icon className="animate-spin" />
                   ) : null}
-                  Saqlash
+                  Save
                 </Button>
               </DialogFooter>
             </form>

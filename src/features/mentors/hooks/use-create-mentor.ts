@@ -15,7 +15,7 @@ export function useCreateMentor() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.mentors.all });
       queryClient.invalidateQueries({ queryKey: queryKeys.admin.stats });
-      toast.success("Mentor muvaffaqiyatli yaratildi");
+      toast.success("Mentor created successfully");
     },
     onError: (e: Error) => toast.error(e.message),
   });

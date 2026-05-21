@@ -14,7 +14,7 @@ export function useCreateAdmin() {
     mutationFn: (payload: AdminCreate) => adminsService.create(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
-      toast.success("Admin muvaffaqiyatli yaratildi");
+      toast.success("Admin created successfully");
     },
     onError: (e: Error) => toast.error(e.message),
   });

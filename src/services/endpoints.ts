@@ -21,23 +21,34 @@ export const ENDPOINTS = {
   students: {
     list: "/user/student",
     detail: (id: number) => `/user/student/${id}`,
+    performance: (id: number) => `/user/student/${id}/performance`,
   },
   mentors: {
     list: "/user/mentor",
     detail: (id: number) => `/user/mentor/${id}`,
+    myGroups: "/mentor/my-groups",
+    myStudents: "/mentor/my-students",
   },
   groups: {
     list: "/groups/",
     detail: (id: number) => `/groups/${id}`,
   },
-  leaderboard: "/leaderboard/",
+  leaderboard: {
+    list: "/leaderboard/",
+    pdpMarket: "/leaderboard/pdp-market",
+  },
   certificates: {
     pending: "/user/certificate/pending",
+    confirmed: "/user/certificate/confirmed",
+    rejected: "/user/certificate/rejected",
+    all: "/user/certificate/all",
+    my: "/user/my-certificates",
     status: (id: number) => `/user/certificate/${id}/status`,
     upload: "/user/certificate/upload",
   },
   monthlyScores: {
     create: "/user/monthly-score",
+    update: (scoreId: number) => `/user/monthly-score/${scoreId}`,
     updateTutor: "/user/monthly-score/tutor",
   },
   logs: {

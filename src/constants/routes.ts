@@ -10,6 +10,7 @@ export const ROUTES = {
     certificates: "/admin/certificates",
     monthlyScores: "/admin/monthly-scores",
     leaderboard: "/admin/leaderboard",
+    pdpMarket: "/admin/pdp-market",
     logs: "/admin/logs",
     settings: "/admin/settings",
   },
@@ -18,11 +19,13 @@ export const ROUTES = {
     group: "/student/group",
     leaderboard: "/student/leaderboard",
     certificates: "/student/certificates",
+    pdpMarket: "/student/pdp-market",
   },
   mentor: {
     dashboard: "/mentor",
     students: "/mentor/students",
     groups: "/mentor/groups",
+    tutorScores: "/mentor/tutor-scores",
     leaderboard: "/mentor/leaderboard",
   },
 } as const;

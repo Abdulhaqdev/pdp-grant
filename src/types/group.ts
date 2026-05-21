@@ -1,10 +1,10 @@
-import type { StudentRead } from "@/types/student";
+import type { StudentRead, StudentReadSlim } from "@/types/student";
 
 export interface GroupRead {
   id: number;
   group_number: string;
   mentor_id: number | null;
-  students?: StudentRead[];
+  students?: (StudentRead | StudentReadSlim)[];
   created_at: string;
   updated_at: string;
 }

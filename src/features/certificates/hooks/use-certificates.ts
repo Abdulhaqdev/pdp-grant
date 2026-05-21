@@ -5,10 +5,22 @@ import { toast } from "sonner";
 
 import { queryKeys } from "@/constants/query-keys";
 import { certificatesService } from "@/services/certificates.service";
+import { useAuthStore } from "@/store/auth.store";
 
+export function useMyCertificates() {
+  const user = useAuthStore((s) => s.user);
+
+  return useQuery({
+    queryKey: queryKeys.certificates.my,
+    queryFn: () => certificatesService.getMy(),
+    enabled: !!user && user.role === "student",
+  });
+}
+
+/** @deprecated Use useAdminCertificates("pending") */
 export function usePendingCertificates() {
   return useQuery({
-    queryKey: queryKeys.certificates.pending,
+    queryKey: queryKeys.certificates.list("pending"),
     queryFn: () => certificatesService.getPending(),
   });
 }
@@ -24,7 +36,7 @@ export function useUpdateCertificateStatus() {
       status: string;
     }) => certificatesService.updateStatus(certId, { status }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.certificates.pending });
+      queryClient.invalidateQueries({ queryKey: queryKeys.certificates.all });
       queryClient.invalidateQueries({ queryKey: queryKeys.admin.stats });
       toast.success("Certificate status updated");
     },

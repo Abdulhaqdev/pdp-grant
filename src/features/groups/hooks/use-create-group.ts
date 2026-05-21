@@ -15,7 +15,7 @@ export function useCreateGroup() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.groups.all });
       queryClient.invalidateQueries({ queryKey: queryKeys.admin.stats });
-      toast.success("Guruh muvaffaqiyatli yaratildi");
+      toast.success("Group created successfully");
     },
     onError: (e: Error) => toast.error(e.message),
   });

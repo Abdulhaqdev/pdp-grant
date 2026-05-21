@@ -35,6 +35,7 @@ interface AdminTableProps<TData> {
   toolbar?: ReactNode;
   pagination?: ReactNode;
   className?: string;
+  getRowClassName?: (row: { original: TData; index: number }) => string;
 }
 
 export function AdminTable<TData>({
@@ -47,6 +48,7 @@ export function AdminTable<TData>({
   toolbar,
   pagination,
   className,
+  getRowClassName,
 }: AdminTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -108,7 +110,16 @@ export function AdminTable<TData>({
               </TableRow>
             ) : (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} className="group">
+                <TableRow
+                  key={row.id}
+                  className={cn(
+                    "group",
+                    getRowClassName?.({
+                      original: row.original,
+                      index: row.index,
+                    })
+                  )}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className="py-3">
                       {flexRender(

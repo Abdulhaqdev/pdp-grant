@@ -25,19 +25,27 @@ export function AppLayout({ children, role }: AppLayoutProps) {
         <div className="flex h-screen overflow-hidden bg-background">
           <AppSidebar
             role={role}
+            variant="desktop"
             pendingCertificates={
               role === "admin" ? stats?.pendingCertificates : undefined
             }
-            className="hidden lg:flex"
+            className="max-lg:hidden lg:flex"
           />
 
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-            <SheetContent side="left" className="w-60 p-0">
+            <SheetContent
+              side="left"
+              showCloseButton
+              className="w-60 max-w-[min(240px,85vw)] gap-0 border-r p-0 data-[side=left]:w-60 data-[side=left]:sm:max-w-[min(240px,85vw)]"
+            >
               <AppSidebar
                 role={role}
+                variant="mobile"
                 pendingCertificates={
                   role === "admin" ? stats?.pendingCertificates : undefined
                 }
+                onNavigate={() => setMobileOpen(false)}
+                className="w-full border-0"
               />
             </SheetContent>
           </Sheet>

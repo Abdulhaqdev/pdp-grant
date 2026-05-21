@@ -35,7 +35,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
             {BRAND.shortName} Grant LMS
           </h2>
           <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-white/85">
-            Talabalar, mentorlar va grant dasturlarini boshqarish platformasi
+            Platform for managing students, mentors, and grant programs
           </p>
           <div className="mt-10 flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm text-white/90 backdrop-blur-sm">
             <span className="size-2 rounded-full bg-[#FFCC19]" />
@@ -62,10 +62,10 @@ export function AuthLayout({ children }: AuthLayoutProps) {
           <div className="mb-8 flex flex-col items-center text-center lg:mb-10">
             <PdpLogo variant="full" size="md" priority className="lg:hidden" />
             <h1 className="font-heading text-2xl font-bold tracking-tight text-[var(--pdp-navy)]">
-              Tizimga kirish
+              Sign in
             </h1>
             <p className="mt-2 text-[15px] text-muted-foreground">
-              Email yoki telefon raqam va parolingizni kiriting
+              Choose your account type and enter your credentials
             </p>
           </div>
           {children}

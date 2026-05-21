@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" fill="none">
+  <rect width="320" height="200" rx="16" fill="#E8F6F4"/>
+  <path d="M108 72c0-22 18-40 52-40s52 18 52 40v88H108V72z" fill="#229b91"/>
+  <path d="M88 88l20-16v96H88V88zm144 0l20 16v80h-20V88z" fill="#1a7a72"/>
+  <rect x="132" y="108" width="56" height="36" rx="8" fill="#ffcc19"/>
+  <text x="160" y="132" text-anchor="middle" fill="#229b91" font-size="18" font-weight="700" font-family="system-ui,sans-serif">PDP</text>
+</svg>

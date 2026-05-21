@@ -2,11 +2,14 @@ import type { LucideIcon } from "lucide-react";
 import {
   AwardIcon,
   BarChart3Icon,
+  ClipboardListIcon,
   GraduationCapIcon,
   LayoutDashboardIcon,
   MedalIcon,
   ScrollTextIcon,
   SettingsIcon,
+  ShoppingBagIcon,
+  StoreIcon,
   UserCogIcon,
   UsersIcon,
   UsersRoundIcon,
@@ -36,6 +39,7 @@ const ADMIN_NAV: AppNavItem[] = [
   },
   { title: "Monthly Scores", href: ROUTES.admin.monthlyScores, icon: BarChart3Icon },
   { title: "Leaderboard", href: ROUTES.admin.leaderboard, icon: MedalIcon },
+  { title: "PDP Market", href: ROUTES.admin.pdpMarket, icon: StoreIcon },
   { title: "Logs", href: ROUTES.admin.logs, icon: ScrollTextIcon },
   { title: "Settings", href: ROUTES.admin.settings, icon: SettingsIcon },
 ];
@@ -45,12 +49,18 @@ const STUDENT_NAV: AppNavItem[] = [
   { title: "My Group", href: ROUTES.student.group, icon: UsersRoundIcon },
   { title: "Leaderboard", href: ROUTES.student.leaderboard, icon: MedalIcon },
   { title: "Certificates", href: ROUTES.student.certificates, icon: AwardIcon },
+  { title: "PDP Market", href: ROUTES.student.pdpMarket, icon: ShoppingBagIcon },
 ];
 
 const MENTOR_NAV: AppNavItem[] = [
   { title: "Dashboard", href: ROUTES.mentor.dashboard, icon: LayoutDashboardIcon },
   { title: "My Students", href: ROUTES.mentor.students, icon: GraduationCapIcon },
   { title: "Groups", href: ROUTES.mentor.groups, icon: UsersRoundIcon },
+  {
+    title: "Tutor Scores",
+    href: ROUTES.mentor.tutorScores,
+    icon: ClipboardListIcon,
+  },
   { title: "Leaderboard", href: ROUTES.mentor.leaderboard, icon: MedalIcon },
 ];
 
@@ -75,6 +85,7 @@ export const BREADCRUMB_LABELS: Record<AppRole, Record<string, string>> = {
     certificates: "Certificates",
     "monthly-scores": "Monthly Scores",
     leaderboard: "Leaderboard",
+    "pdp-market": "PDP Market",
     logs: "Logs",
     settings: "Settings",
   },
@@ -82,10 +93,12 @@ export const BREADCRUMB_LABELS: Record<AppRole, Record<string, string>> = {
     group: "My Group",
     leaderboard: "Leaderboard",
     certificates: "Certificates",
+    "pdp-market": "PDP Market",
   },
   mentor: {
     students: "My Students",
     groups: "Groups",
+    "tutor-scores": "Tutor Scores",
     leaderboard: "Leaderboard",
   },
 };

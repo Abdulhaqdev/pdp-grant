@@ -95,32 +95,32 @@ export function AppSidebarUser() {
       <DropdownMenuSeparator />
       <DropdownMenuItem onClick={() => router.push(getProfilePath(role))}>
         <UserIcon className="size-4" />
-        Profil
+        Profile
       </DropdownMenuItem>
       <DropdownMenuSub>
         <DropdownMenuSubTrigger>
           <SunIcon className="size-4" />
-          Mavzu
+          Theme
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent>
           <DropdownMenuItem onClick={() => setTheme("light")}>
             <SunIcon className="size-4" />
-            Yorug‘
+            Light
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme("dark")}>
             <MoonIcon className="size-4" />
-            Qorong‘u
+            Dark
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme("system")}>
             <MonitorIcon className="size-4" />
-            Tizim
+            System
           </DropdownMenuItem>
         </DropdownMenuSubContent>
       </DropdownMenuSub>
       <DropdownMenuSeparator />
       <DropdownMenuItem variant="destructive" onClick={logout}>
         <LogOutIcon className="size-4" />
-        Chiqish
+        Log out
       </DropdownMenuItem>
     </DropdownMenuContent>
   );

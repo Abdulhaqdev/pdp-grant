@@ -74,15 +74,15 @@ export function CreateMentorDialog() {
           render={
             <Button size="sm">
               <PlusIcon className="size-4" />
-              Mentor qo‘shish
+              Add mentor
             </Button>
           }
         />
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Yangi mentor</DialogTitle>
+            <DialogTitle>Add mentor</DialogTitle>
             <DialogDescription>
-              POST /user/mentor — faqat admin uchun
+              Create a new mentor account and optionally assign groups.
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -93,12 +93,12 @@ export function CreateMentorDialog() {
                 name="group_ids"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Guruhlar (ixtiyoriy)</FormLabel>
+                    <FormLabel>Groups (optional)</FormLabel>
                     <FormControl>
                       <MultiSelect
                         value={field.value}
                         onValueChange={field.onChange}
-                        placeholder="Guruhlarni tanlang"
+                        placeholder="Select groups"
                         options={groups.map((g) => ({
                           value: g.id,
                           label: g.group_number,
@@ -115,13 +115,13 @@ export function CreateMentorDialog() {
                   variant="outline"
                   onClick={() => setOpen(false)}
                 >
-                  Bekor qilish
+                  Cancel
                 </Button>
                 <Button type="submit" disabled={createMentor.isPending}>
                   {createMentor.isPending ? (
                     <Loader2Icon className="animate-spin" />
                   ) : null}
-                  Saqlash
+                  Save
                 </Button>
               </DialogFooter>
             </form>

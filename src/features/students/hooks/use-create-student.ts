@@ -15,7 +15,7 @@ export function useCreateStudent() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.students.all });
       queryClient.invalidateQueries({ queryKey: queryKeys.admin.stats });
-      toast.success("Talaba muvaffaqiyatli yaratildi");
+      toast.success("Student created successfully");
     },
     onError: (e: Error) => toast.error(e.message),
   });

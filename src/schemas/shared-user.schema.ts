@@ -6,17 +6,20 @@ const PHONE_LENGTH = 13;
 
 export const phoneFieldSchema = z
   .string()
-  .min(1, "Telefon raqam majburiy")
+  .min(1, "Phone number is required")
   .transform((v) => normalizePhone(v))
   .refine((v) => v.length === PHONE_LENGTH, {
-    message: `Telefon ${PHONE_LENGTH} belgidan iborat bo‘lishi kerak (+998901234567)`,
+    message: `Phone must be ${PHONE_LENGTH} characters (e.g. +998901234567)`,
   });
 
-export const baseUserFieldsSchema = z.object({
+export const userProfileFieldsSchema = z.object({
   phone: phoneFieldSchema,
-  email: z.string().email("To‘g‘ri email kiriting").max(50),
-  first_name: z.string().min(1, "Ism majburiy").max(25),
-  last_name: z.string().min(1, "Familiya majburiy").max(25),
-  father_name: z.string().min(1, "Otasining ismi majburiy").max(25),
-  password: z.string().min(6, "Parol kamida 6 belgi").max(255),
+  email: z.string().email("Enter a valid email").max(50),
+  first_name: z.string().min(1, "First name is required").max(25),
+  last_name: z.string().min(1, "Last name is required").max(25),
+  father_name: z.string().min(1, "Father's name is required").max(25),
+});
+
+export const baseUserFieldsSchema = userProfileFieldsSchema.extend({
+  password: z.string().min(6, "Password must be at least 6 characters").max(255),
 });

@@ -28,7 +28,7 @@ export function AppNavbar({ role, onMenuClick, className }: AppNavbarProps) {
           size="icon-sm"
           className="lg:hidden"
           onClick={onMenuClick}
-          aria-label="Menyuni ochish"
+          aria-label="Open menu"
         >
           <MenuIcon className="size-4" />
         </Button>

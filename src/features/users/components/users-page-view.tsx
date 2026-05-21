@@ -35,9 +35,9 @@ export function UsersPageView() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Foydalanuvchilar</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Users</h1>
           <p className="text-sm text-muted-foreground">
-            Barcha foydalanuvchilar va yangi admin yaratish
+            View all users and create administrator accounts
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -46,7 +46,7 @@ export function UsersPageView() {
             onValueChange={(v) => setRoleFilter(v as typeof roleFilter)}
             className="w-[140px]"
             options={[
-              { value: "all", label: "Barcha rollar" },
+              { value: "all", label: "All roles" },
               { value: "admin", label: "Admin" },
               { value: "mentor", label: "Mentor" },
               { value: "student", label: "Student" },
@@ -55,7 +55,7 @@ export function UsersPageView() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="Qidirish..."
+            placeholder="Search..."
             className="w-full sm:w-56"
           />
           <CreateAdminDialog />
@@ -69,7 +69,7 @@ export function UsersPageView() {
         data={filtered}
         loading={isLoading}
         emptyIcon={UserCogIcon}
-        emptyTitle="Foydalanuvchilar topilmadi"
+        emptyTitle="No users found"
       />
     </div>
   );

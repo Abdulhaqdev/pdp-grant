@@ -4,28 +4,44 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 
 import { Badge } from "@/components/ui/badge";
+import { CertificateFileCell } from "@/features/certificates/components/certificate-file-cell";
+import {
+  formatCertificateStatus,
+  getCertificateStatusBadgeVariant,
+} from "@/features/certificates/lib/certificate-status";
 import type { CertificateRead } from "@/types/certificate";
+
+function formatCertType(type: string) {
+  return type.replace(/_/g, " ");
+}
 
 export const certificateColumns: ColumnDef<CertificateRead>[] = [
   { accessorKey: "id", header: "ID" },
   { accessorKey: "student_id", header: "Student" },
   { accessorKey: "title", header: "Title" },
-  { accessorKey: "cert_type", header: "Type" },
+  {
+    accessorKey: "cert_type",
+    header: "Type",
+    cell: ({ row }) => (
+      <span className="capitalize">{formatCertType(row.original.cert_type)}</span>
+    ),
+  },
+  {
+    id: "file",
+    header: "File",
+    cell: ({ row }) => (
+      <CertificateFileCell
+        filePath={row.original.file_path}
+        title={row.original.title}
+      />
+    ),
+  },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <Badge
-        variant={
-          row.original.status === "pending"
-            ? "secondary"
-            : row.original.status === "approved"
-              ? "default"
-              : "destructive"
-        }
-        className="capitalize"
-      >
-        {row.original.status}
+      <Badge variant={getCertificateStatusBadgeVariant(row.original.status)}>
+        {formatCertificateStatus(row.original.status)}
       </Badge>
     ),
   },

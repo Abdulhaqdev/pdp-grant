@@ -70,15 +70,15 @@ export function CreateAdminDialog() {
           render={
             <Button size="sm">
               <PlusIcon className="size-4" />
-              Admin qo‘shish
+              Add admin
             </Button>
           }
         />
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Yangi admin</DialogTitle>
+            <DialogTitle>Add admin</DialogTitle>
             <DialogDescription>
-              POST /user/admin — faqat admin uchun
+              Create a new administrator account.
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -105,13 +105,13 @@ export function CreateAdminDialog() {
                   variant="outline"
                   onClick={() => setOpen(false)}
                 >
-                  Bekor qilish
+                  Cancel
                 </Button>
                 <Button type="submit" disabled={createAdmin.isPending}>
                   {createAdmin.isPending ? (
                     <Loader2Icon className="animate-spin" />
                   ) : null}
-                  Saqlash
+                  Save
                 </Button>
               </DialogFooter>
             </form>

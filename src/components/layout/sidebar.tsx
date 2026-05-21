@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
 import {
   AwardIcon,
+  ClipboardListIcon,
   GraduationCapIcon,
   LayoutDashboardIcon,
   MedalIcon,
@@ -53,6 +54,11 @@ const NAV_BY_ROLE: Record<AppRole, NavItem[]> = {
     { title: "Dashboard", href: "/mentor", icon: LayoutDashboardIcon },
     { title: "My Students", href: "/mentor/students", icon: GraduationCapIcon },
     { title: "Groups", href: "/mentor/groups", icon: UsersRoundIcon },
+    {
+      title: "Tutor Scores",
+      href: "/mentor/tutor-scores",
+      icon: ClipboardListIcon,
+    },
     { title: "Leaderboard", href: "/mentor/leaderboard", icon: MedalIcon },
   ],
 };
